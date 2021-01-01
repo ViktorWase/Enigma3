@@ -1,0 +1,242 @@
+<!--
+	Jasså du, här ska det hackas?
+	Jo, det går inte emot någon regel.
+	Lycka till. Det kommer behövas.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+
+<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<style type="text/css">
+.form-style-8{
+	font-family: 'Open Sans Condensed', arial, sans;
+	width: 500px;
+	padding: 30px;
+	background: #FFFFFF;
+	margin: 50px auto;
+	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+	-moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+	-webkit-box-shadow:  0px 0px 15px rgba(0, 0, 0, 0.22);
+
+}
+.form-style-8 h2{
+	background: #4D4D4D;
+	text-transform: uppercase;
+	font-family: 'Open Sans Condensed', sans-serif;
+	color: #797979;
+	font-size: 18px;
+	font-weight: 100;
+	padding: 20px;
+	margin: -30px -30px 30px -30px;
+}
+.form-style-8 input[type="text"],
+.form-style-8 input[type="date"],
+.form-style-8 input[type="datetime"],
+.form-style-8 input[type="email"],
+.form-style-8 input[type="number"],
+.form-style-8 input[type="search"],
+.form-style-8 input[type="time"],
+.form-style-8 input[type="url"],
+.form-style-8 input[type="password"],
+.form-style-8 textarea,
+.form-style-8 select 
+{
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	outline: none;
+	display: block;
+	width: 100%;
+	padding: 7px;
+	border: none;
+	border-bottom: 1px solid #ddd;
+	background: transparent;
+	margin-bottom: 10px;
+	font: 16px Arial, Helvetica, sans-serif;
+	height: 45px;
+}
+.form-style-8 textarea{
+	resize:none;
+	overflow: hidden;
+}
+.form-style-8 input[type="button"], 
+.form-style-8 input[type="submit"]{
+	-moz-box-shadow: inset 0px 1px 0px 0px #45D6D6;
+	-webkit-box-shadow: inset 0px 1px 0px 0px #45D6D6;
+	box-shadow: inset 0px 1px 0px 0px #45D6D6;
+	background-color: #2CBBBB;
+	border: 1px solid #27A0A0;
+	display: inline-block;
+	cursor: pointer;
+	color: #FFFFFF;
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-size: 14px;
+	padding: 8px 18px;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+.form-style-8 input[type="button"]:hover, 
+.form-style-8 input[type="submit"]:hover {
+	background:linear-gradient(to bottom, #34CACA 5%, #30C9C9 100%);
+	background-color:#34CACA;
+}
+
+h2 {text-align: center;}
+</style>
+
+<meta charset="UTF-8">
+
+<script>
+
+function word2nr(word){
+	// Converts a word to a number
+	var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'å', 'ä', 'ö'];
+	var num = BigInt(0);
+	var base = BigInt(1);
+	for(var i=0; i< word.length; i++)
+	{
+		var letter = word[i];
+		if (alphabet.includes(letter) == false){
+			return -1;
+		}
+		else{
+			var val = base * BigInt(alphabet.indexOf(letter));
+			num += BigInt(val);
+			base *= BigInt(alphabet.length);
+		}
+	}
+	return num;
+}
+
+function magic(a, b, c){
+	// Good-luck.
+	var d = BigInt(1);
+	var val = BigInt(1);
+	var f = BigInt(992132);
+	if (a == 0){
+		return 0;
+	}
+
+	while (b > 0){
+		var e = BigInt(b % BigInt(2));
+		var b = BigInt(b / BigInt(2));
+		d *= BigInt(a);
+
+		if(d % f == 0)
+		{
+			f += d;
+		}
+
+		if (e == BigInt(1)){
+			val *= BigInt(d);
+			val = BigInt(val % c);
+			f += val;
+		}
+		d = BigInt(d % c);
+	}
+	return val
+}
+
+function sigma(n) {
+	console.log(n)
+	n = Number(n)
+	var s = 0;
+	for(var i=1; i<n; i++)
+	{
+		if(n%i==0){
+			s += 1;
+		}
+	}
+	return s;
+}
+
+function randint(n){
+	var out = Math.floor(Math.random() * n);
+	if(out == n)
+	{
+		return out - 1;
+	}
+	return out;
+}
+
+function getResponse()
+{
+	var firstArray = ["No", "Nope", "Not even close", "You need to do better", "I'm not mad - I'm dissapointed", "Nooooo", "Try again", "Do or do not", "Nope nope nope nope", "Again", "Nuh-huh"];
+	var secondArray = ["proper", "absolute", "complete", "utter", "massive", "huge", "unreliable", "full on"];
+	var thirdArray = ["bacon", "Hufflepuff", "cake", "carpet", "cactus", "turtle", "moon", "waspnest", "Paladin"];
+	var fourthArray = ["fan", "sniffer", "licker", "toucher", "gawker", "poker", "worshipper", "farter"];
+	var firstStr = firstArray[randint(firstArray.length)]
+	var secondStr = secondArray[randint(secondArray.length)]
+	var thirdStr = thirdArray[randint(thirdArray.length)]
+	var fourthStr = fourthArray[randint(fourthArray.length)]
+
+	var outStr = firstStr.concat(", you ");
+	outStr = outStr.concat(secondStr);
+	outStr = outStr.concat(" ");
+	outStr = outStr.concat(thirdStr);
+	outStr = outStr.concat("-");
+	outStr = outStr.concat(fourthStr);
+	outStr = outStr.concat(".");
+
+	return outStr;
+}
+
+function isCorrect(ans){
+	// Is the word the correct word?
+	num = BigInt(word2nr(ans));
+	if (num == BigInt(-1)){
+		return false;
+	}
+
+	// Do a quick-check first
+	if(sigma(num % BigInt(1000000)) != BigInt(0)){
+		// Then the proper thang
+		var allyour = BigInt(1066340417491710595814572169);
+		var courage = BigInt(99194853094755497);
+		var election = magic(allyour, num, courage);
+
+		//return val == BigInt(14568659014177116);
+		return election == BigInt(17106563860864608);
+	}
+	else{
+		return num % BigInt(14320) == BigInt(-1);
+	}
+}
+
+function myFunction() {
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	const ans = urlParams.get('fname')
+
+  if(ans == "" || ans == null){
+  	document.getElementById("demo").innerHTML = "";
+  }
+  else if(isCorrect(ans))
+  {
+  	document.getElementById("demo").innerHTML = "YES! You got it!";
+  }
+  else{
+  	document.getElementById("demo").innerHTML = getResponse();
+  }
+}
+window.onload = myFunction
+</script>
+
+<title>Enigma 3</title>
+</head>
+<body>
+
+<div class="form-style-8">
+  <h2>Question 17</h2>
+  <form action="">
+    <input type="text" name="fname" placeholder="Answer" />
+    <input type="submit" value="Send" />
+  </form>
+</div>
+
+<h2><p id="demo"></p></h2>
+
+</body>
+</html> 
+
